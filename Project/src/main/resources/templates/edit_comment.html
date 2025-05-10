@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+  <title>Редактировать комментарий</title>
+</head>
+<body>
+  <div th:replace="~{fragments/header :: header}"></div>
+  <table class="layout">
+
+    <tr>
+      <td>
+        <h1>Изменить комментарий</h1>
+        <form th:action="@{/articles/{articleId}/comments/{commentId}/edit(articleId=${comment.articleId}, commentId=${comment.id})}" method="post">
+          <div>
+            <label for="text">Комментарий:</label>
+            <textarea id="text" name="text" rows="4" cols="50" th:text="${comment.text}" required></textarea>
+          </div>
+          <div>
+            <button type="submit">Сохранить</button>
+          </div>
+        </form>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+  <title>Новая статья</title>
+</head>
+<body>
+  <div th:replace="~{fragments/header :: header}"></div>
+  <table class="layout">
+
+    <tr>
+      <td>
+        <h1>Добавить статью</h1>
+        <form th:action="@{/articles}" method="post">
+          <div>
+            <label for="name">Заголовок:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <label for="text">Содержимое:</label>
+          <textarea id="text" name="text" rows="10" cols="50" required></textarea>
+
+          <button type="submit">Сохранить</button>
+        </form>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
+    </tr>
+  </table>
+</body>
+</html>

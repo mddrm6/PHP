@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    <title>Мой блог</title>
+  </head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <table class="layout">
+
+      <tr>
+        <td>
+          <div th:each="article : ${articles}">
+            <h2>
+              <a th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.name}">Название статьи</a>
+            </h2>
+            <p th:text="${article.text}">Текст статьи</p>
+            <hr>
+          </div>
+          <a th:href="@{/articles/}">Добавить статью</a>
+        </td>
+
+      </tr>
+
+      <tr>
+        <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
+      </tr>
+    </table>
+  </body>
+</html>

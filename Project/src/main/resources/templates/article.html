@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+    <title th:text="${article.name}">Статья</title>
+</head>
+<body>
+  <div th:replace="~{fragments/header :: header}"></div>
+  <table class="layout">
+
+    <tr>
+      <td>
+        <h2>
+          <a th:href="@{/articles/{id}/edit(id=${article.id})}">Редактировать</a>
+        </h2>
+        <h1 th:text="${article.name}">Название статьи</h1>
+        <p th:text="${article.text}">Текст статьи</p>
+        <form th:action="@{/articles/{id}/delete(id=${article.id})}" method="post">
+          <button type="submit">Удалить</button>
+        </form>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <h2>Написать комментарий</h2>
+        <form th:action="@{/articles/{id}/comments(id=${article.id})}" method="post">
+          <label for="text">Комментарий:</label>
+          <textarea id="text" name="text" rows="4" cols="50" required></textarea>
+
+          <button type="submit">Написать комментарий</button>
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h2>Комментарии</h2>
+        <div th:each="comment : ${comments}" th:id="'comment' + ${comment.id}">
+          <p th:text="${comment.text}">Текст комментария</p>
+          <p th:text="${#dates.format(comment.createdAtAsDate, 'dd MMMM yyyy, HH:mm')}">Время публикации комментария</p>
+          <a th:href="@{/articles/{articleId}/comments/{commentId}/edit(articleId=${article.id}, commentId=${comment.id})}">Редактировать</a>
+          <form th:action="@{/articles/{articleId}/comments/{commentId}/delete(articleId=${article.id}, commentId=${comment.id})}" method="post">
+            <button type="submit">Удалить</button>
+          </form>
+          <hr>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="footer" colspan="2">Все права защищены (c) Мой блог</td>
+    </tr>
+  </table>
+</body>
+</html>

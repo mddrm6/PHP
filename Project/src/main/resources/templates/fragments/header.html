@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой блог</title>
+</head>
+<body>
+    <header class="header">
+        <h2>Мой блог</h2>
+        <nav>
+            <ul>
+                <li>
+                    <a th:href="@{/}">Articles</a>
+                </li>
+                <li>
+                    <a th:href="@{/about-me}">About</a>
+                </li>
+                <li th:if="${user.authToken == null}">
+                    <a th:href="@{/users/register}">Register</a>
+                </li>
+                <li th:if="${user.authToken == null}">
+                    <a th:href="@{/users/login}">Login</a>
+                </li>
+                <li th:if="${user.authToken != null}">
+                    <a th:href="@{/users/logout}">Logout</a>
+                </li>
+                <li th:if="${user != null and user.authToken != null}">
+                    <span th:text="${user.nickname}"></span>
+                </li>
+                <li th:if="${user == null or user.authToken == null}">
+                    <span>Пожалуйста, войдите в аккаунт</span>
+                </li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>
